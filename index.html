@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Educa360 Dev</title>
+</head>
+<body>
+
+  <h1>Educa360 - Entorno de Desarrollo</h1>
+
+  <div>
+    <h2>Guardar y leer dato de prueba</h2>
+    <input type="text" id="datoInput" placeholder="Escribe un mensaje de prueba...">
+    <button id="btnGuardar">Guardar dato</button>
+
+
+    <h3>Datos guardados:</h3>
+    <ul id="listaDatos"></ul>
+  </div>
+
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import {
+      getFirestore,
+      connectFirestoreEmulator,
+      collection,
+      addDoc,
+      onSnapshot
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+
+    const env = import.meta?.env || {};
+    const projectId = env.VITE_FIREBASE_PROJECT_ID || 'educa360';
+    const emulatorPort = Number(env.VITE_FIREBASE_EMULATOR_PORT) || 8080;
+
+
+    const app = initializeApp({ projectId });
+    const db = getFirestore(app);
